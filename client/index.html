@@ -1,0 +1,96 @@
+<head>
+    <title>w3ctech ChangSha</title>
+</head>
+<body>
+    <div id="container">
+        {{> header }}
+        <div id="con">
+            {{> main }}
+        </div>    
+        <footer></footer>
+    </div>
+</body>
+<template name="main">
+{{#if display "list" }}
+{{> list }}
+{{/if}}
+{{#if display "content" }}
+{{> content }}
+{{/if}}
+{{#if display "login" }}
+{{> login }}
+{{/if}}
+{{#if display "post" }}
+{{> post }}
+{{/if}}
+</template>
+
+<template name="post">
+	<div class="poster">
+        <p class="err">
+        {{# if err }}
+        {{err}}
+        {{/ if }}
+        </p>
+		<p>
+			<label for="title">Title</label>
+			<input type="text" id="title" />
+		</p>
+		<p>
+			<label for="content">Content</label>
+            <textarea id="content" rows="10" cols="50"></textarea>
+		</p>
+		<p>
+			<label for="tags">Tags</label>
+			<input type="text" id="tags" />
+		</p>
+        <p class="actions">
+        	<input type="button" id="submit" value="Post"/>
+        	<input type="button" id="cancel" value="Leave"/>
+        </p>
+	</div>
+</template>
+<template name="login">
+    
+	<div class="loginbox">
+		<p>
+            <label>Your Name</label>
+			<input type="text" id="username" />
+		</p>
+		<p>
+            <label>Your Password</label>
+			<input type="password" id="password" />
+		</p>
+        <p class="actions">
+        	<input type="button" id="submit" value="Enter"/>
+        	<input type="button" id="cancel" value="Leave"/>
+        </p>
+	</div>
+</template>
+
+<template name="header">
+	<div class="header">
+		<h1>
+			<a href="/">w3ctech - ChangSha</a>
+		</h1>
+	</div>
+</template>
+
+<template name="content">
+{{#with article }}
+    <h3>{{ title }}</h3>
+    <p class="time">{{ formarttime }}</p>
+    <div class="content">{{ content }}</div>
+{{/with}}
+</template>
+<template name="list">
+<ul>
+    {{#each list}} 
+    <li>
+    <time datetime="{{createtime}}">{{ formarttime }}</time>
+    <a 
+        id="{{ _id }}"
+        href="/{{ _id }}">{{ title }}</a></li>
+    {{/each}} 
+</ul>
+</template>
